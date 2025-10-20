@@ -334,7 +334,12 @@
                 <option value="2">Assessment 03: Identifying Business Opportunities</option>
                 <option value="3">Assessment 04: Understanding Cost Structures</option>
                 <option value="4">Assessment 05: Long Term Orientation</option>
-            </select>
+                <option value="5">Assessment 06: Recording Business Transactions</option>
+                <option value="6">Assessment 07: Basic Financial Terms</option>
+                <option value="7">Assessment 08: Accounting and Business Reporting</option>
+                <option value="8">Assessment 09: Marketing Education</option>
+                <option value="9">Assessment 10: Marketing Education Value</option>
+                </select>
         </div>
 
         <div class="score-board">
@@ -373,67 +378,146 @@
         let quizStarted = false;
 
         const assessments = [
-            [
-                { question: "Starting up a new venture with a new idea is called entrepreneurship. एक नया विचार के आधार पर एक नया उद्यम शुरू करना उद्यमिता कहलाता है।", options: ["TRUE सत्य", "FALSE गलत"], correct: 1 },
-                { question: "Entrepreneurship is an opportunity to create wealth. उद्यमिता धन पैदा करने का एक अवसर है।", options: ["TRUE सत्य", "FALSE गलत"], correct: 0 },
-                { question: "Which of these is an example of entrepreneurship? इनमें से कौन उद्यमिता का एक उदाहरण है?", options: ["Starting up a business based on an old idea, existing business module, and less risk.", "Teaching in an IIT/MBBS coaching institute.", "Starting up a business based on a new app/software, with high risk.", "None of the above."], correct: 2 },
-                { question: "Which of these is an example of entrepreneurship?", options: ["Starting up a new type of restaurant in a city.", "Working in a call center/BPO.", "Teaching mathematics in a coaching center.", "Managing tasks given by the boss."], correct: 0 },
-                { question: "An entrepreneur does the following activities – managing, organizing and making all the decisions by himself.", options: ["TRUE सत्य", "FALSE गलत"], correct: 0 },
-                { question: "An entrepreneur is a person who takes less risk, avoids experimentation.", options: ["TRUE सत्य", "FALSE गलत"], correct: 1 },
-                { question: "A successful entrepreneur can become rich very fast.", options: ["TRUE सत्य", "FALSE गलत"], correct: 0 },
-                { question: "All the people who start up a business based on a new idea are always successful.", options: ["TRUE सत्य", "FALSE गलत"], correct: 1 },
-                { question: "92% of the startups are successful within the first 3 years of starting?", options: ["TRUE सत्य", "FALSE गलत"], correct: 1, explanation: "In a study of about 3200 startups in silicon valley, about 92% failed within the first 3 years." },
-                { question: "An entrepreneur is one who is involved in a FEW of these activities – managing, organizing, innovating, assuming risks.", options: ["TRUE सत्य", "FALSE गलत"], correct: 0 }
-            ],
-            [
-                { question: "Does entrepreneurship involve managing, organizing, and evaluating risks?", options: ["Managing responsibilities", "Organizing tasks", "Evaluating risks", "All of the above उपर के सभी"], correct: 3 },
-                { question: "Entrepreneurship involves organizing, managing and assuming the risks pertaining to your enterprise.", options: ["TRUE सत्य", "FALSE गलत"], correct: 0 },
-                { question: "Building a business takes --- time than it takes to generate the idea.", options: ["Shorter छोटा", "Same वही", "Longer लंबा समय", "Can not say"], correct: 2 },
-                { question: "Entrepreneurs need to have --- to be successful.", options: ["Patience धैर्य", "Patient धैर्यवान", "Money धन", "Luck भाग्य"], correct: 0 },
-                { question: "--- is the specific tool of entrepreneurship.", options: ["Creation सृजन", "Renovation नवीकरण", "Innovation नवाचार", "Experimentation प्रयोग"], correct: 2 },
-                { question: "Entrepreneurs need membership in physical communities where ideas can be shared and shaped.", options: ["TRUE सत्य", "FALSE गलत"], correct: 0 },
-                { question: "Organizations are not entrepreneurial but people are entrepreneurial.", options: ["TRUE सत्य", "FALSE गलत"], correct: 0 },
-                { question: "How to inspire and create entrepreneurial leaders within organizations?", options: ["Develop entrepreneurial ecosystems", "Promote employees often", "Both are correct दोनों सही हैं", "None are correct"], correct: 2 },
-                { question: "Entrepreneurship framed as intentional iteration creates a prepared mindset.", options: ["A mindset that is prepared", "Expects multiple challenges", "Both are correct दोनों सही हैं", "None are correct"], correct: 2 },
-                { question: "Entrepreneurs should not be greedy to grow big.", options: ["TRUE सत्य", "FALSE गलत"], correct: 1, explanation: "Entrepreneurs should be greedy to grow big, but this needs patience." }
-            ],
-            [
-                { question: "An idea is defined as the content of cognition.", options: ["TRUE सत्य", "FALSE गलत"], correct: 0 },
-                { question: "Is every idea a possible opportunity?", options: ["TRUE सत्य", "FALSE गलत"], correct: 1 },
-                { question: "Successful entrepreneurship requires the ability to balance technical knowledge and market knowledge.", options: ["TRUE सत्य", "FALSE गलत"], correct: 0 },
-                { question: "Cash flows simply put is the difference between the cash that flows in and cash that flows out.", options: ["TRUE सत्य", "FALSE गलत"], correct: 0 },
-                { question: "Upfront capital and R&D requirements should be high while evaluating an idea.", options: ["TRUE सत्य", "FALSE गलत"], correct: 1, explanation: "Upfront capital and R&D requirements should be LOW." },
-                { question: "The venture/business should be of high strategic value to a potential acquirer.", options: ["TRUE सत्य", "FALSE गलत"], correct: 0 },
-                { question: "How to identify whether an idea is opportunity or not?", options: ["An idea needs to be valuable", "An idea needs to fulfill customer needs", "Both are correct दोनों सही हैं", "Neither is correct"], correct: 2 },
-                { question: "Why do we need to evaluate an idea?", options: ["To know if customers will buy", "To know if entrepreneur will profit", "To know if a viable product can be made", "All of the above उपर के सभी"], correct: 3 },
-                { question: "An electrician opened a grocery store but couldn't profit. Why?", options: ["No technical knowledge", "Market already saturated", "Both are correct दोनों सही हैं", "Neither is correct"], correct: 2 },
-                { question: "The market should be large and growing while evaluating an idea.", options: ["TRUE सत्य", "FALSE गलत"], correct: 0 }
-            ],
-            [
-                { question: "___ is the monetary value of resources used in making a product.", options: ["Inputs इनपुट", "Receivables", "Inventories माल", "Cost लागत"], correct: 3 },
-                { question: "Direct vs indirect costs are based on their association with different cost objects.", options: ["TRUE सत्य", "FALSE गलत"], correct: 0 },
-                { question: "Costs that do not vary in the short term are called ___ costs.", options: ["Direct Cost", "Indirect Cost", "Fixed cost निश्चित लागत", "Expired cost"], correct: 2 },
-                { question: "___ is the key determinant of COGS on the P&L statement.", options: ["Indirect Cost", "Fixed Cost", "Expired Cost", "Product Cost उत्पादन की लागत"], correct: 3 },
-                { question: "___ is the cost of any material directly used in production.", options: ["Expired Cost", "Product cost उत्पादन लागत", "Direct Material Cost", "Unexpired Costs"], correct: 1 },
-                { question: "___ cost includes salaries, bonuses, insurance, pension benefits.", options: ["Surplus", "Direct Material cost", "Direct Labour Cost प्रत्यक्ष श्रम लागत", "Unexpired Costs"], correct: 2 },
-                { question: "Cost allocation is a method to distribute indirect costs across cost objects.", options: ["TRUE सत्य", "FALSE गलत"], correct: 0 },
-                { question: "Costs that vary with output are called variable costs.", options: ["Product cost", "Direct Material cost", "Variable cost परिवर्तनीय लागत", "Fixed cost"], correct: 2 },
-                { question: "___ costs are those completely consumed by the business.", options: ["Expired Costs खर्च की लागत", "Unexpired Costs", "Direct Costs", "Indirect Cost"], correct: 0 },
-                { question: "Retail companies like Reliance Fresh have ___ degree of conversion.", options: ["Low to Medium निम्न से मध्यम", "Medium to High", "Low to High", "High to Medium"], correct: 0, explanation: "Retail companies have low to moderate degree of conversion." }
-            ],
-            [
-                { question: "What are the characteristics of a successful entrepreneur?", options: ["Risk-Taker", "Goal-Oriented", "Thrive on uncertainty", "All of the above ऊपर के सभी"], correct: 3 },
-                { question: "What is NOT a characteristic of a successful entrepreneur?", options: ["Good communication skills", "Strong technical knowledge", "Quits halfway when difficult", "Solves problems creatively"], correct: 2 },
-                { question: "Entrepreneurs are always looking for new ways. Which trait is this?", options: ["Optimistic Nature", "Consistency", "Creativity रचनात्मकता", "Commitment"], correct: 2 },
-                { question: "Entrepreneurs effectively sell their product. Which trait is this?", options: ["Optimistic Nature", "Goal Oriented", "Communication Skills संचार कौशल", "Creativity"], correct: 2 },
-                { question: "Entrepreneurs don't let uncertainty stop them. Which trait?", options: ["Communication Skills", "Strong Technical Knowledge", "Creativity", "Risk-Taker जोखिम लेने वाला"], correct: 3 },
-                { question: "___ is the ability to evaluate, assimilate and exploit knowledge.", options: ["Additive capacity", "Assimilative Capacity", "Absorptive Capacity अवशोषण क्षमता", "Attractive Capacity"], correct: 2 },
-                { question: "Why is prior knowledge important for entrepreneurs?", options: ["Contributes to expectation formation", "Helps make investment decisions", "Prior knowledge doesn't help much", "Both a) and b) दोनों"], correct: 3 },
-                { question: "A tailor opened a restaurant but it failed. Why?", options: ["Not a risk taker", "Not goal-oriented", "No prior knowledge of restaurants", "None of the above"], correct: 2 },
-                { question: "A cook opened a South-Indian restaurant in Chennai but it failed. Why?", options: ["No technical knowledge", "Too many competitors, not creative", "Both a) and b) दोनों", "Neither is correct"], correct: 2 },
-                { question: "Absorptive Capacity comes from prior related knowledge.", options: ["TRUE सत्य", "FALSE गलत"], correct: 0 }
-            ]
-        ];
+                // Assessment 01
+                [
+                    { question: "Starting up a new venture with a new idea is called entrepreneurship. एक नया विचार के आधार पर एक नया उद्यम शुरू करना उद्यमिता कहलाता है।", options: ["TRUE सत्य", "FALSE गलत"], correct: 0 },
+                    { question: "Entrepreneurship is an opportunity to create wealth. उद्यमिता धन पैदा करने का एक अवसर है।", options: ["TRUE सत्य", "FALSE गलत"], correct: 0 },
+                    { question: "Which of these is an example of entrepreneurship? इनमें से कौन उद्यमिता का एक उदाहरण है?", options: ["Starting up a business based on an old idea, existing business module, and less risk.", "Teaching in an IIT/MBBS coaching institute.", "Starting up a business based on a new app/software, with high risk.", "None of the above."], correct: 2 },
+                    { question: "Which of these is an example of entrepreneurship? इनमें से कौन उद्यमिता का एक उदाहरण है?", options: ["Starting up a new type of restaurant in a city.", "Working in a call center/BPO.", "Teaching mathematics in a coaching center.", "Managing and completing tasks given by the boss in a company."], correct: 0 },
+                    { question: "An entrepreneur does the following activities – managing, organizing and making all the decisions by himself.", options: ["TRUE सत्य", "FALSE गलत"], correct: 0 },
+                    { question: "An entrepreneur is a person who takes less risk, avoids experimentation.", options: ["TRUE सत्य", "FALSE गलत"], correct: 1 },
+                    { question: "A successful entrepreneur can become rich very fast.", options: ["TRUE सत्य", "FALSE गलत"], correct: 0 },
+                    { question: "All the people who start up a business based on a new idea are always successful.", options: ["TRUE सत्य", "FALSE गलत"], correct: 1 },
+                    { question: "92% of the startups are successful within the first 3 years of starting? 92% स्टार्टअप शुरू के पहले 3 साल के भीतर सफल होते हैं?", options: ["TRUE सत्य", "FALSE गलत"], correct: 1, explanation: "In a study of about 3200 startups in the Silicon Valley, about 92% failed within the first 3 years." },
+                    { question: "An entrepreneur is one who is involved in a FEW of these activities – managing, organizing, innovating, assuming risks.", options: ["TRUE सत्य", "FALSE गलत"], correct: 0 }
+                ],
+
+                // Assessment 02
+                [
+                    { question: "Does entrepreneurship involve managing responsibilities, organizing tasks, and evaluating risks? क्या उद्यमिता में प्रबंधन, आयोजन और जोखिम मूल्यांकन शामिल है?", options: ["Managing responsibilities", "Organizing tasks", "Evaluating risks", "All of the above उपर के सभी"], correct: 3 },
+                    { question: "Entrepreneurship involves organizing, managing and assuming the risks pertaining to your enterprise.", options: ["TRUE सत्य", "FALSE गलत"], correct: 0 },
+                    { question: "Building a business takes --- time than it takes to generate the idea.", options: ["Shorter छोटा", "Same वही", "Longer लंबा समय", "Can not say नहीं कह सकते"], correct: 2 },
+                    { question: "Entrepreneurs need to have --- to be successful.", options: ["Patience धैर्य", "Patient धैर्यवान", "Money धन", "Luck भाग्य"], correct: 0 },
+                    { question: "--- is the specific tool of entrepreneurship.", options: ["Creation सृजन", "Renovation नवीकरण", "Innovation नवाचार", "Experimentation प्रयोग"], correct: 2 },
+                    { question: "Entrepreneurs need membership in physical communities where ideas can be shared and shaped.", options: ["TRUE सत्य", "FALSE गलत"], correct: 0 },
+                    { question: "Organizations are not entrepreneurial but people are entrepreneurial.", options: ["TRUE सत्य", "FALSE गलत"], correct: 0 },
+                    { question: "How to inspire and create entrepreneurial leaders within organizations?", options: ["Develop entrepreneurial ecosystems inside organizations", "Promote employees often", "Both are correct दोनों सही हैं", "None are correct"], correct: 2 },
+                    { question: "Entrepreneurship framed as intentional iteration creates a prepared mindset.", options: ["A mindset that is prepared", "Expects multiple challenges", "Both are correct दोनों सही हैं", "None are correct"], correct: 2 },
+                    { question: "Entrepreneurs should not be greedy to grow big, as this needs patience as well.", options: ["TRUE सत्य", "FALSE गलत"], correct: 1, explanation: "Entrepreneurs should be greedy to grow big, but this needs patience as well." }
+                ],
+
+                // Assessment 03
+                [
+                    { question: "An idea is defined as the content of cognition. एक विचार को अनुभूति की सामग्री के रूप में परिभाषित किया गया है।", options: ["TRUE सत्य", "FALSE गलत"], correct: 0 },
+                    { question: "Is every idea a possible opportunity? क्या हर विचार एक संभावित अवसर है?", options: ["TRUE सत्य", "FALSE गलत"], correct: 1 },
+                    { question: "Successful entrepreneurship requires the ability to balance technical knowledge and market knowledge.", options: ["TRUE सत्य", "FALSE गलत"], correct: 0 },
+                    { question: "Cash flows simply put is the difference between the cash that flows in and cash that flows out. नकदी प्रवाह सरल शब्दों में नकदी के बीच का अंतर है।", options: ["TRUE सत्य", "FALSE गलत"], correct: 0 },
+                    { question: "Upfront capital and R&D requirements should be high while evaluating whether an idea is an opportunity or not.", options: ["TRUE सत्य", "FALSE गलत"], correct: 1, explanation: "Upfront capital and R&D requirements should be low while evaluating whether an idea is an opportunity or not." },
+                    { question: "The venture/business should be of high strategic value to a potential acquirer.", options: ["TRUE सत्य", "FALSE गलत"], correct: 0 },
+                    { question: "How to identify whether an idea is opportunity or not?", options: ["An idea needs to be valuable", "An idea needs to fulfill the need of a customer", "Both are correct दोनों सही हैं", "Neither is correct"], correct: 2 },
+                    { question: "Why do we need to evaluate an idea?", options: ["To know whether customers will buy the end product", "To know whether the entrepreneur will make profits", "To know whether the entrepreneur can make a variable product", "All of the above उपर के सभी"], correct: 3 },
+                    { question: "An electrician observed that grocery stores in his area are running successfully and wanted to open one too. He opened one but was not able to profit. Why?", options: ["The electrician did not have any technical knowledge", "The electrician did not realize there were already three successful stores", "Both are correct दोनों सही हैं", "Neither is correct"], correct: 2 },
+                    { question: "The market should be large and growing while evaluating whether an idea is an opportunity or not.", options: ["TRUE सत्य", "FALSE गलत"], correct: 0 }
+                ],
+
+                // Assessment 04
+                [
+                    { question: "___ is the monetary value of resources, like material labor and overheads. Used in the making of a product or delivery of a service.", options: ["Inputs इनपुट", "Receivables प्राप्तियां", "Inventories माल", "Cost लागत"], correct: 3 },
+                    { question: "Direct vs indirect costs are based on their association with different cost objects.", options: ["TRUE सत्य", "FALSE गलत"], correct: 0 },
+                    { question: "Costs that do not vary in the short term, regardless of changes in output levels are called ___ costs.", options: ["Direct Cost", "Indirect Cost", "Fixed cost निश्चित लागत", "Expired cost"], correct: 2 },
+                    { question: "___ is the key determinant of the cost of goods sold (COGS), which appears on the P&L statement.", options: ["Indirect Cost", "Fixed Cost", "Expired Cost", "Product Cost उत्पादन की लागत"], correct: 3 },
+                    { question: "___ is the cost of any material directly used in the production of the output.", options: ["Expired Cost", "Product cost उत्पादन लागत", "Direct Material Cost", "Unexpired Costs"], correct: 1 },
+                    { question: "___ cost includes salaries, bonuses, insurance, pension benefits, earned leave paid to the individuals involved.", options: ["Surplus", "Direct Material cost", "Direct Labour Cost प्रत्यक्ष श्रम लागत", "Unexpired Costs"], correct: 2 },
+                    { question: "Cost allocation is a method through which a business allocates or distributes an indirect cost across various cost objects.", options: ["TRUE सत्य", "FALSE गलत"], correct: 0 },
+                    { question: "Costs that vary with the output are called variable costs.", options: ["Product cost", "Direct Material cost", "Variable cost परिवर्तनीय लागत", "Fixed cost"], correct: 2 },
+                    { question: "___ costs are those that have been completely consumed or the benefits from which have been received by the business.", options: ["Expired Costs खर्च की लागत", "Unexpired Costs", "Direct Costs", "Indirect Cost"], correct: 0 },
+                    { question: "Retail companies like Reliance Fresh, D-Mart, Big Bazaar have ___ degree of conversion.", options: ["Low to Medium निम्न से मध्यम", "Medium to High", "Low to High", "High to Medium"], correct: 0, explanation: "Retail companies have low to moderate degree of conversion." }
+                ],
+
+                // Assessment 05
+                [
+                    { question: "What are the characteristics/traits of a successful entrepreneur?", options: ["Risk-Taker", "Goal-Oriented", "Thrive on uncertainty", "All of the above 上"], correct: 3 },
+                    { question: "What is not a characteristic/trait of a successful entrepreneur?", options: ["Good communication skills", "To have strong technical knowledge", "Quits halfway when the situation becomes difficult", "Solves a problem with a unique and creative solution"], correct: 2 },
+                    { question: "Entrepreneurs are always looking for new ways of doing things and how they can make them better. Which trait is being discussed here?", options: ["Optimistic Nature", "Consistency", "Creativity रचनात्मकता", "Commitment"], correct: 2 },
+                    { question: "Entrepreneurs effectively sell their product or service to clients and customers. Which trait is being discussed here?", options: ["Optimistic Nature", "Goal Oriented", "Communication Skills संचार कौशल", "Creativity"], correct: 2 },
+                    { question: "Entrepreneurs don't let uncertainty and potential failure stop them from doing what needs to be done. Which trait is being discussed here?", options: ["Communication Skills", "Strong Technical Knowledge", "Creativity", "Risk-Taker जोखिम लेने वाला"], correct: 3 },
+                    { question: "___ is the ability to evaluate, assimilate and exploit knowledge.", options: ["Additive capacity", "Assimilative Capacity", "Absorptive Capacity अवशोषण क्षमता", "Attractive Capacity"], correct: 2 },
+                    { question: "Why is it important to have prior knowledge and relatable expertise to become a successful entrepreneur?", options: ["Prior knowledge contributes to expectation formation", "Helps to make decisions like whether to invest", "Prior knowledge does not help much", "Both a) and b)"], correct: 3 },
+                    { question: "A successful tailor wanted to try something new. So he opened a street food restaurant in his area. But his restaurant did not run properly. Why?", options: ["He was not a risk taker", "He was not goal-oriented", "He did not have prior knowledge of how to run a restaurant", "None of the above"], correct: 2 },
+                    { question: "A knowledgeable cook opened a South-Indian Restaurant in Chennai. But the business was not running smoothly. What went wrong?", options: ["He did not have technical knowledge", "Too many competitors and he was not creative", "Both a) and b) दोनों"], correct: 2 },
+                    { question: "Absorptive Capacity comes from prior related knowledge to be able to make sense of, recognize the value of, and use new information.", options: ["TRUE सत्य", "FALSE गलत"], correct: 0 }
+                ],
+
+                // Assessment 06
+                [
+                    { question: "——— is a record of all of the existing assets, liabilities and equity.", options: ["Profit and Loss Statement", "Statement of Cash Flow", "Balance Sheet तुलन पत्र", "General Journal"], correct: 2 },
+                    { question: "What are three financial sheets used to record and report a business?", options: ["Balance Sheet, General Journal, Profit and Loss Statement", "Balance Sheet, Statement of Cash Flow, Ledger Account", "Statement of Cash Flow, General Journal, Ledger Account", "Statement of Cash Flow, Balance Sheet, Profit and Loss Statement"], correct: 3 },
+                    { question: "Equity and liabilities come first in balance sheet, followed by assets.", options: ["TRUE सही", "FALSE गलत"], correct: 0 },
+                    { question: "Select the correct equation", options: ["Total Assets = Total Liabilities + Equity", "Total Liabilities = Total Assets + Equity", "Total Equity = Total Asset + Total Liabilities", "Total Equity = Total Liabilities - Total Assets"], correct: 0 },
+                    { question: "A business cannot survive for long without ______?", options: ["Manpower", "Cash", "Infrastructure", "None"], correct: 1 },
+                    { question: "Geeta has a grocery shop; the customers have already paid Rs 5,000 to her. Geeta decided to pay her supplier Rs.2000 at the end of the week. According to Accrual Basis, calculate her Profit?", options: ["0", "3000", "300", "5000"], correct: 1 },
+                    { question: "Accountants worldwide use the triple-entry system to record transactions.", options: ["TRUE सही", "FALSE गलत"], correct: 1, explanation: "Accountants primarily use the double-entry accounting system to record transactions." },
+                    { question: "Transactions are entered into the general journal in chronological order.", options: ["TRUE सही", "FALSE गलत"], correct: 0 },
+                    { question: "——— is a record of all of a business' existing assets, liabilities and equity.", options: ["Profit and Loss Statement", "Statement of Cash Flow", "Balance Sheet", "General Journal"], correct: 2 },
+                    { question: "Balance Sheet is a record of all of a business revenues and costs over a certain period of time.", options: ["TRUE सही", "FALSE गलत"], correct: 1 }
+                ],
+
+                // Assessment 07
+                [
+                    { question: "What is the primary objective of a business?", options: ["Make money for retailers by providing goods for services", "Make money for customers by providing goods or services", "Make money for employees by providing goods or services", "Make money for investors by providing goods or services"], correct: 3 },
+                    { question: "What are the key inputs of business?", options: ["Labour", "Land", "Capital", "All of the above"], correct: 3 },
+                    { question: "What is the output of the business?", options: ["Goods", "Services", "Both of the above", "Neither is correct"], correct: 2 },
+                    { question: "What are the different forms of business?", options: ["Sole proprietorship, Friendship, corporations", "Sole proprietorship, Partnership, Corporations", "Sole proprietorship, Partnership, Commendation", "Sole president, Partnership, commemoration"], correct: 1 },
+                    { question: "What is a sole proprietorship?", options: ["A single owner who is also usually responsible for the day-to-day running of the business", "A single employee who also usually responsible", "A single retail also usually responsible", "A single partner who is also usually responsible"], correct: 0 },
+                    { question: "_____ has multiple owners or partners, some of whom are also usually responsible for the day-to-day running of the business.", options: ["Friendship", "Presidentship", "Partnership", "Corporations"], correct: 2 },
+                    { question: "What is a corporation?", options: ["A separate legal entity with a large number of owners", "A separate illegal entity", "Multiple owners or partners", "All of the above"], correct: 0 },
+                    { question: "Identify a non-example of accounting?", options: ["How much value in rupee of goods or services has the business sold", "List of investments in land, facilities, buildings, etc. the business made", "Costs the business incurred", "List and details of favorite customers"], correct: 3 },
+                    { question: "_____ is about planning for the uncertain future and deciding what kind of investments should the business make.", options: ["Finance", "Governance", "Maintenance", "Dominance"], correct: 0 },
+                    { question: "_____ is a way for a business to raise capital but there is no obligation to repay entities that provide capital; instead, entities are given ownership of the business.", options: ["Liabilities", "Equity", "Partnership", "Assets"], correct: 1 }
+                ],
+
+                // Assessment 08
+                [
+                    { question: "Balance Sheet divided into 2 parts", options: ["Assets & Liabilities", "Equity & Liabilities", "Equity & Assets", "None of them are correct"], correct: 1 },
+                    { question: "___ sheet represents the financial position of a business as of a particular date, typically at the end of a quarter of financial year.", options: ["Statement of cash flows", "Profit & loss (P&L) statement", "Balance sheet", "Ledger sheet"], correct: 1 },
+                    { question: "Inventories the value of raw materials held, work-in-process and finished goods held by the business.", options: ["TRUE", "FALSE"], correct: 0 },
+                    { question: "___ are those assets that are expected to be sold or converted to cash or consumed within one year.", options: ["Current Assets", "Current Liabilities", "Non-current Assets", "Non-current Liabilities"], correct: 0 },
+                    { question: "Non-current assets include ___ which typically last for more than one year.", options: ["Plant, property and establishment", "Plant, property and equipment", "Penchant, property, equipment", "Plant, property, experiment"], correct: 1 },
+                    { question: "What are the common types of current assets?", options: ["Cash, Inventories, Deliverables, Long-term loans, and advances", "Tangible assets, Intangible assets, Non-current investments", "Cash, Inventories, Intangible assets, Non-current investments", "Cash, Inventories, Receivables, Short-term loans and advances"], correct: 3 },
+                    { question: "___ is the value of raw materials held, work-in-process and finished goods held by the business.", options: ["Surplus", "Revenues", "Debentures", "Inventories"], correct: 3 },
+                    { question: "Any income or profit not paid out to shareholders is called ___ ?", options: ["Retained earnings", "Revenues", "Debentures", "Surplus"], correct: 0 },
+                    { question: "___ is also called an income statement.", options: ["Statement of cash flows", "Profit and Loss statement", "Balance Sheet", "General Journal"], correct: 1 },
+                    { question: "Both assets and liabilities are classified as current and non-current.", options: ["TRUE", "FALSE"], correct: 0 }
+                ],
+
+                // Assessment 09
+                [
+                    { question: "A trusted adviser promotes a product aggressively to the customer.", options: ["TRUE", "FALSE"], correct: 1 },
+                    { question: "How to become a trusted adviser?", options: ["Understand the concerns of the customer", "Peddle/promote the product", "Both are correct", "Neither is correct"], correct: 0 },
+                    { question: "Service promise is the assurance given to the customer about in-time delivery of assured product.", options: ["Integrity and Certainty", "Sincerity and Speciality", "Quantity and Quality", "Variety and Guaranty"], correct: 2 },
+                    { question: "Delivering what a customer wants is one of the constituents of a service promise.", options: ["TRUE", "FALSE"], correct: 0 },
+                    { question: "Why should we identify customer needs?", options: ["The motive driving the customer to purchase an item is the need for it", "Ensures customer satisfaction and loyalty", "Both are correct", "Neither is correct"], correct: 2 },
+                    { question: "The innovation of products based on customer needs is of value for the business.", options: ["TRUE", "FALSE"], correct: 0 },
+                    { question: "Select the correct structure of a good sales pitch.", options: ["Hook and Objective", "Rook and Objective", "Rook and Subjective", "Nook and Subjective"], correct: 0 },
+                    { question: "Hearing is the same as listening.", options: ["TRUE", "FALSE"], correct: 1 },
+                    { question: "Listening for enjoyment is called as ........", options: ["Appreciative Listening", "Articulative Listening", "Inspirational Listening", "Empathetic Listening"], correct: 0 },
+                    { question: "Active listening is one of the client reactions to a typical sales pitch.", options: ["TRUE", "FALSE"], correct: 1 }
+                ],
+
+                // Assessment 10
+                [
+                    { question: "Why is a customer purchasing from a particular store?", options: ["Because the customer values the AC you provide inside the shop.", "Because the customer values the product or service the shop provides.", "Because the customer values the friendship with the shop's owner.", "All of the above."], correct: 1 },
+                    { question: "Value is what the shop/store provides to the customer.", options: ["TRUE", "FALSE"], correct: 1 },
+                    { question: "Select the correct statement.", options: ["Value is consultant defined.", "Salesman defined.", "Value is businessman defined.", "Value is customer defined."], correct: 3 },
+                    { question: "Value depends on the features or services consumed by the customer.", options: ["Provided by the store", "Sold by the salesman", "Discounted by the owner", "Consumed by the customer"], correct: 3 },
+                    { question: "Where does the value reside?", options: ["In the salesman's mind", "At the POC of the store", "In the customer's mind", "In the store's owner's mind"], correct: 2 },
+                    { question: "Value can be defined in terms of --- perspective as well as based on --- .", options: ["Customer, cost", "Newcomer, price", "Customer, price", "Newcomer, cost"], correct: 2 },
+                    { question: "________ everyone competes on price as no one is exploring how they are able to differently add value to customers.", options: ["Digitization", "Commoditization", "Privatization", "Capitalization"], correct: 1 },
+                    { question: "What is the advantage of adopting a value perspective?", options: ["Clear differentiation.", "Helping the customer understand benefits and asking for a share.", "Ability to justify pricing or even price at a premium.", "All of the above."], correct: 3 },
+                    { question: "According to the Value Framework for Entrepreneurs, select the best statement.", options: ["Value Creation - Value Delivery - Value Capture.", "Value Capture - Value Creation - Value Delivery.", "Value Delivery - Value Creation - Value Capture.", "Value Creation - Value Delivery - Value Capture."], correct: 0 },
+                    { question: "Why is a customer purchasing from a particular store? (repeat)", options: ["Because the customer values the AC you provide inside the shop.", "Because the customer values the product or service the shop provides.", "Because the customer values the friendship with the shop's owner.", "All of the above."], correct: 1 }
+                ]
+            ];
 
         document.getElementById('startBtn').addEventListener('click', startQuiz);
         document.getElementById('assessmentSelect').addEventListener('change', function () {
@@ -620,3 +704,4 @@
 </body>
 
 </html>
+
