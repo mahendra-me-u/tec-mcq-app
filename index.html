@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEC Certificate MCQ Practice</title>
+
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#667eea">
+    <meta name="description" content="Practice assessments for TEC entrepreneurship certification">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="TEC MCQ">
+
+    <!-- Manifest -->
+    <link rel="manifest" href="manifest.json">
+
+    <!-- Icons -->
+    <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+    <link rel="apple-touch-icon" href="icon-192.png">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 40px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .assessment-selector {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .assessment-selector label {
+            display: block;
+            margin-bottom: 10px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .assessment-selector select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            background: white;
+        }
+
+        .score-board {
+            display: flex;
+            justify-content: space-around;
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .score-item {
+            text-align: center;
+        }
+
+        .score-label {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .score-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .question-card {
+            margin-bottom: 30px;
+        }
+
+        .question-number {
+            color: #667eea;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .question-text {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .option {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 15px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .option:hover:not(.disabled) {
+            border-color: #667eea;
+            transform: translateX(5px);
+        }
+
+        .option.selected {
+            background: #e7e9fd;
+            border-color: #667eea;
+        }
+
+        .option.correct {
+            background: #d4edda;
+            border-color: #28a745;
+        }
+
+        .option.incorrect {
+            background: #f8d7da;
+            border-color: #dc3545;
+        }
+
+        .option.disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .option-label {
+            font-weight: bold;
+            margin-right: 10px;
+            color: #667eea;
+            min-width: 25px;
+        }
+
+        .option-text {
+            flex: 1;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        button {
+            flex: 1;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn {
+            background: #667eea;
+            color: white;
+        }
+
+        .submit-btn:hover:not(:disabled) {
+            background: #5568d3;
+            transform: translateY(-2px);
+        }
+
+        .submit-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .next-btn {
+            background: #28a745;
+            color: white;
+        }
+
+        .next-btn:hover {
+            background: #218838;
+            transform: translateY(-2px);
+        }
+
+        .reset-btn {
+            background: #6c757d;
+            color: white;
+        }
+
+        .reset-btn:hover {
+            background: #5a6268;
+            transform: translateY(-2px);
+        }
+
+        .feedback {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            font-weight: 500;
+        }
+
+        .feedback.correct {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .feedback.incorrect {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .explanation {
+            margin-top: 10px;
+            padding: 10px;
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 5px;
+            color: #856404;
+        }
+
+        .completion {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .completion h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+
+        .final-score {
+            font-size: 48px;
+            font-weight: bold;
+            color: #28a745;
+            margin: 20px 0;
+        }
+
+        .install-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #667eea;
+            color: white;
+            padding: 15px 25px;
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            display: none;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateY(0);
+            }
+
+            40% {
+                transform: translateY(-10px);
+            }
+
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        .install-btn:hover {
+            background: #5568d3;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 TEC Certificate MCQ Practice</h1>
+            <p class="subtitle">Practice assessments for entrepreneurship certification</p>
+        </div>
+
+        <div class="assessment-selector">
+            <label for="assessmentSelect">Select Assessment:</label>
+            <select id="assessmentSelect">
+                <option value="0">Assessment 01: Entrepreneurship</option>
+                <option value="1">Assessment 02: Entrepreneurship and Entrepreneurial Character</option>
+                <option value="2">Assessment 03: Identifying Business Opportunities</option>
+                <option value="3">Assessment 04: Understanding Cost Structures</option>
+                <option value="4">Assessment 05: Long Term Orientation</option>
+            </select>
+        </div>
+
+        <div class="score-board">
+            <div class="score-item">
+                <div class="score-label">Question</div>
+                <div class="score-value" id="currentQuestion">-/-</div>
+            </div>
+            <div class="score-item">
+                <div class="score-label">Score</div>
+                <div class="score-value" id="score">0</div>
+            </div>
+            <div class="score-item">
+                <div class="score-label">Accuracy</div>
+                <div class="score-value" id="accuracy">0%</div>
+            </div>
+        </div>
+
+        <div id="quizContent">
+            <div class="completion">
+                <h2>📚 Ready to Practice?</h2>
+                <p style="font-size: 18px; color: #666; margin: 20px 0 30px 0;">
+                    Select an assessment above and click the button below to begin your practice session.
+                </p>
+                <button class="submit-btn" id="startBtn" style="width: 100%; padding: 20px;">Start Assessment</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentAssessment = 0;
+        let currentQ = 0;
+        let totalScore = 0;
+        let answered = 0;
+        let selectedOption = null;
+        let hasAnswered = false;
+        let quizStarted = false;
+
+        const assessments = [
+            [
+                { question: "Starting up a new venture with a new idea is called entrepreneurship. एक नया विचार के आधार पर एक नया उद्यम शुरू करना उद्यमिता कहलाता है।", options: ["TRUE सत्य", "FALSE गलत"], correct: 1 },
+                { question: "Entrepreneurship is an opportunity to create wealth. उद्यमिता धन पैदा करने का एक अवसर है।", options: ["TRUE सत्य", "FALSE गलत"], correct: 0 },
+                { question: "Which of these is an example of entrepreneurship? इनमें से कौन उद्यमिता का एक उदाहरण है?", options: ["Starting up a business based on an old idea, existing business module, and less risk.", "Teaching in an IIT/MBBS coaching institute.", "Starting up a business based on a new app/software, with high risk.", "None of the above."], correct: 2 },
+                { question: "Which of these is an example of entrepreneurship?", options: ["Starting up a new type of restaurant in a city.", "Working in a call center/BPO.", "Teaching mathematics in a coaching center.", "Managing tasks given by the boss."], correct: 0 },
+                { question: "An entrepreneur does the following activities – managing, organizing and making all the decisions by himself.", options: ["TRUE सत्य", "FALSE गलत"], correct: 0 },
+                { question: "An entrepreneur is a person who takes less risk, avoids experimentation.", options: ["TRUE सत्य", "FALSE गलत"], correct: 1 },
+                { question: "A successful entrepreneur can become rich very fast.", options: ["TRUE सत्य", "FALSE गलत"], correct: 0 },
+                { question: "All the people who start up a business based on a new idea are always successful.", options: ["TRUE सत्य", "FALSE गलत"], correct: 1 },
+                { question: "92% of the startups are successful within the first 3 years of starting?", options: ["TRUE सत्य", "FALSE गलत"], correct: 1, explanation: "In a study of about 3200 startups in silicon valley, about 92% failed within the first 3 years." },
+                { question: "An entrepreneur is one who is involved in a FEW of these activities – managing, organizing, innovating, assuming risks.", options: ["TRUE सत्य", "FALSE गलत"], correct: 0 }
+            ],
+            [
+                { question: "Does entrepreneurship involve managing, organizing, and evaluating risks?", options: ["Managing responsibilities", "Organizing tasks", "Evaluating risks", "All of the above उपर के सभी"], correct: 3 },
+                { question: "Entrepreneurship involves organizing, managing and assuming the risks pertaining to your enterprise.", options: ["TRUE सत्य", "FALSE गलत"], correct: 0 },
+                { question: "Building a business takes --- time than it takes to generate the idea.", options: ["Shorter छोटा", "Same वही", "Longer लंबा समय", "Can not say"], correct: 2 },
+                { question: "Entrepreneurs need to have --- to be successful.", options: ["Patience धैर्य", "Patient धैर्यवान", "Money धन", "Luck भाग्य"], correct: 0 },
+                { question: "--- is the specific tool of entrepreneurship.", options: ["Creation सृजन", "Renovation नवीकरण", "Innovation नवाचार", "Experimentation प्रयोग"], correct: 2 },
+                { question: "Entrepreneurs need membership in physical communities where ideas can be shared and shaped.", options: ["TRUE सत्य", "FALSE गलत"], correct: 0 },
+                { question: "Organizations are not entrepreneurial but people are entrepreneurial.", options: ["TRUE सत्य", "FALSE गलत"], correct: 0 },
+                { question: "How to inspire and create entrepreneurial leaders within organizations?", options: ["Develop entrepreneurial ecosystems", "Promote employees often", "Both are correct दोनों सही हैं", "None are correct"], correct: 2 },
+                { question: "Entrepreneurship framed as intentional iteration creates a prepared mindset.", options: ["A mindset that is prepared", "Expects multiple challenges", "Both are correct दोनों सही हैं", "None are correct"], correct: 2 },
+                { question: "Entrepreneurs should not be greedy to grow big.", options: ["TRUE सत्य", "FALSE गलत"], correct: 1, explanation: "Entrepreneurs should be greedy to grow big, but this needs patience." }
+            ],
+            [
+                { question: "An idea is defined as the content of cognition.", options: ["TRUE सत्य", "FALSE गलत"], correct: 0 },
+                { question: "Is every idea a possible opportunity?", options: ["TRUE सत्य", "FALSE गलत"], correct: 1 },
+                { question: "Successful entrepreneurship requires the ability to balance technical knowledge and market knowledge.", options: ["TRUE सत्य", "FALSE गलत"], correct: 0 },
+                { question: "Cash flows simply put is the difference between the cash that flows in and cash that flows out.", options: ["TRUE सत्य", "FALSE गलत"], correct: 0 },
+                { question: "Upfront capital and R&D requirements should be high while evaluating an idea.", options: ["TRUE सत्य", "FALSE गलत"], correct: 1, explanation: "Upfront capital and R&D requirements should be LOW." },
+                { question: "The venture/business should be of high strategic value to a potential acquirer.", options: ["TRUE सत्य", "FALSE गलत"], correct: 0 },
+                { question: "How to identify whether an idea is opportunity or not?", options: ["An idea needs to be valuable", "An idea needs to fulfill customer needs", "Both are correct दोनों सही हैं", "Neither is correct"], correct: 2 },
+                { question: "Why do we need to evaluate an idea?", options: ["To know if customers will buy", "To know if entrepreneur will profit", "To know if a viable product can be made", "All of the above उपर के सभी"], correct: 3 },
+                { question: "An electrician opened a grocery store but couldn't profit. Why?", options: ["No technical knowledge", "Market already saturated", "Both are correct दोनों सही हैं", "Neither is correct"], correct: 2 },
+                { question: "The market should be large and growing while evaluating an idea.", options: ["TRUE सत्य", "FALSE गलत"], correct: 0 }
+            ],
+            [
+                { question: "___ is the monetary value of resources used in making a product.", options: ["Inputs इनपुट", "Receivables", "Inventories माल", "Cost लागत"], correct: 3 },
+                { question: "Direct vs indirect costs are based on their association with different cost objects.", options: ["TRUE सत्य", "FALSE गलत"], correct: 0 },
+                { question: "Costs that do not vary in the short term are called ___ costs.", options: ["Direct Cost", "Indirect Cost", "Fixed cost निश्चित लागत", "Expired cost"], correct: 2 },
+                { question: "___ is the key determinant of COGS on the P&L statement.", options: ["Indirect Cost", "Fixed Cost", "Expired Cost", "Product Cost उत्पादन की लागत"], correct: 3 },
+                { question: "___ is the cost of any material directly used in production.", options: ["Expired Cost", "Product cost उत्पादन लागत", "Direct Material Cost", "Unexpired Costs"], correct: 1 },
+                { question: "___ cost includes salaries, bonuses, insurance, pension benefits.", options: ["Surplus", "Direct Material cost", "Direct Labour Cost प्रत्यक्ष श्रम लागत", "Unexpired Costs"], correct: 2 },
+                { question: "Cost allocation is a method to distribute indirect costs across cost objects.", options: ["TRUE सत्य", "FALSE गलत"], correct: 0 },
+                { question: "Costs that vary with output are called variable costs.", options: ["Product cost", "Direct Material cost", "Variable cost परिवर्तनीय लागत", "Fixed cost"], correct: 2 },
+                { question: "___ costs are those completely consumed by the business.", options: ["Expired Costs खर्च की लागत", "Unexpired Costs", "Direct Costs", "Indirect Cost"], correct: 0 },
+                { question: "Retail companies like Reliance Fresh have ___ degree of conversion.", options: ["Low to Medium निम्न से मध्यम", "Medium to High", "Low to High", "High to Medium"], correct: 0, explanation: "Retail companies have low to moderate degree of conversion." }
+            ],
+            [
+                { question: "What are the characteristics of a successful entrepreneur?", options: ["Risk-Taker", "Goal-Oriented", "Thrive on uncertainty", "All of the above ऊपर के सभी"], correct: 3 },
+                { question: "What is NOT a characteristic of a successful entrepreneur?", options: ["Good communication skills", "Strong technical knowledge", "Quits halfway when difficult", "Solves problems creatively"], correct: 2 },
+                { question: "Entrepreneurs are always looking for new ways. Which trait is this?", options: ["Optimistic Nature", "Consistency", "Creativity रचनात्मकता", "Commitment"], correct: 2 },
+                { question: "Entrepreneurs effectively sell their product. Which trait is this?", options: ["Optimistic Nature", "Goal Oriented", "Communication Skills संचार कौशल", "Creativity"], correct: 2 },
+                { question: "Entrepreneurs don't let uncertainty stop them. Which trait?", options: ["Communication Skills", "Strong Technical Knowledge", "Creativity", "Risk-Taker जोखिम लेने वाला"], correct: 3 },
+                { question: "___ is the ability to evaluate, assimilate and exploit knowledge.", options: ["Additive capacity", "Assimilative Capacity", "Absorptive Capacity अवशोषण क्षमता", "Attractive Capacity"], correct: 2 },
+                { question: "Why is prior knowledge important for entrepreneurs?", options: ["Contributes to expectation formation", "Helps make investment decisions", "Prior knowledge doesn't help much", "Both a) and b) दोनों"], correct: 3 },
+                { question: "A tailor opened a restaurant but it failed. Why?", options: ["Not a risk taker", "Not goal-oriented", "No prior knowledge of restaurants", "None of the above"], correct: 2 },
+                { question: "A cook opened a South-Indian restaurant in Chennai but it failed. Why?", options: ["No technical knowledge", "Too many competitors, not creative", "Both a) and b) दोनों", "Neither is correct"], correct: 2 },
+                { question: "Absorptive Capacity comes from prior related knowledge.", options: ["TRUE सत्य", "FALSE गलत"], correct: 0 }
+            ]
+        ];
+
+        document.getElementById('startBtn').addEventListener('click', startQuiz);
+        document.getElementById('assessmentSelect').addEventListener('change', function () {
+            currentAssessment = parseInt(this.value);
+            if (quizStarted) {
+                resetQuiz();
+            }
+        });
+
+        function startQuiz() {
+            quizStarted = true;
+            renderQuestion();
+        }
+
+        function renderQuestion() {
+            const questions = assessments[currentAssessment];
+            const q = questions[currentQ];
+            const content = document.getElementById('quizContent');
+
+            if (currentQ >= questions.length) {
+                showCompletion();
+                return;
+            }
+
+            content.innerHTML = `
+                <div class="question-card">
+                    <div class="question-number">Question ${currentQ + 1} of ${questions.length}</div>
+                    <div class="question-text">${q.question}</div>
+                    <div class="options" id="optionsContainer">
+                        ${q.options.map((opt, i) => `
+                            <div class="option" data-index="${i}">
+                                <span class="option-label">${String.fromCharCode(65 + i)}.</span>
+                                <span class="option-text">${opt}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div id="feedback"></div>
+                    <div class="buttons">
+                        <button class="submit-btn" id="submitBtn" disabled>Submit Answer</button>
+                        <button class="next-btn" id="nextBtn" style="display:none">Next Question</button>
+                    </div>
+                </div>
+            `;
+
+            document.querySelectorAll('.option').forEach(opt => {
+                opt.addEventListener('click', function () {
+                    if (!hasAnswered) {
+                        selectOption(parseInt(this.dataset.index));
+                    }
+                });
+            });
+
+            document.getElementById('submitBtn').addEventListener('click', submitAnswer);
+            document.getElementById('nextBtn').addEventListener('click', nextQuestion);
+
+            updateScoreboard();
+        }
+
+        function selectOption(index) {
+            if (hasAnswered) return;
+
+            document.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
+            document.querySelectorAll('.option')[index].classList.add('selected');
+
+            selectedOption = index;
+            document.getElementById('submitBtn').disabled = false;
+        }
+
+        function submitAnswer() {
+            if (selectedOption === null || hasAnswered) return;
+
+            const questions = assessments[currentAssessment];
+            hasAnswered = true;
+            answered++;
+
+            const q = questions[currentQ];
+            const options = document.querySelectorAll('.option');
+            const feedback = document.getElementById('feedback');
+
+            options.forEach(opt => opt.classList.add('disabled'));
+
+            if (selectedOption === q.correct) {
+                totalScore++;
+                options[selectedOption].classList.add('correct');
+                feedback.className = 'feedback correct';
+                feedback.innerHTML = '✓ Correct! Well done!';
+            } else {
+                options[selectedOption].classList.add('incorrect');
+                options[q.correct].classList.add('correct');
+                feedback.className = 'feedback incorrect';
+                feedback.innerHTML = `✗ Incorrect. The correct answer is ${String.fromCharCode(65 + q.correct)}.`;
+            }
+
+            if (q.explanation) {
+                feedback.innerHTML += `<div class="explanation">📝 ${q.explanation}</div>`;
+            }
+
+            document.getElementById('submitBtn').style.display = 'none';
+            document.getElementById('nextBtn').style.display = 'block';
+            updateScoreboard();
+        }
+
+        function nextQuestion() {
+            currentQ++;
+            selectedOption = null;
+            hasAnswered = false;
+            renderQuestion();
+        }
+
+        function updateScoreboard() {
+            const questions = assessments[currentAssessment];
+            document.getElementById('currentQuestion').textContent = `${currentQ + 1}/${questions.length}`;
+            document.getElementById('score').textContent = totalScore;
+            const accuracy = answered > 0 ? Math.round((totalScore / answered) * 100) : 0;
+            document.getElementById('accuracy').textContent = accuracy + '%';
+        }
+
+        function showCompletion() {
+            const questions = assessments[currentAssessment];
+            const content = document.getElementById('quizContent');
+            const percentage = Math.round((totalScore / questions.length) * 100);
+
+            content.innerHTML = `
+                <div class="completion">
+                    <h2>🎉 Assessment Completed!</h2>
+                    <div class="final-score">${totalScore}/${questions.length}</div>
+                    <p style="font-size: 20px; color: #666; margin-bottom: 30px;">
+                        You scored ${percentage}%
+                    </p>
+                    <button class="reset-btn" id="resetBtn" style="width: 100%">Try Again</button>
+                </div>
+            `;
+
+            document.getElementById('resetBtn').addEventListener('click', resetQuiz);
+        }
+
+        function resetQuiz() {
+            currentQ = 0;
+            totalScore = 0;
+            answered = 0;
+            selectedOption = null;
+            hasAnswered = false;
+            quizStarted = true;
+            renderQuestion();
+        }
+
+        // PWA: Register Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('service-worker.js')
+                    .then(reg => console.log('✅ Service Worker registered'))
+                    .catch(err => console.log('❌ Service Worker registration failed:', err));
+            });
+        }
+
+        // PWA: Install Prompt
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+
+            const installBtn = document.createElement('button');
+            installBtn.className = 'install-btn';
+            installBtn.innerHTML = '📱 Install App';
+            installBtn.style.display = 'block';
+            document.body.appendChild(installBtn);
+
+            installBtn.addEventListener('click', async () => {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                if (outcome === 'accepted') {
+                    console.log('✅ User installed the app');
+                    installBtn.remove();
+                }
+                deferredPrompt = null;
+            });
+        });
+
+        // PWA: Installed Event
+        window.addEventListener('appinstalled', () => {
+            console.log('✅ PWA installed successfully');
+        });
+    </script>
+</body>
+
+</html>
